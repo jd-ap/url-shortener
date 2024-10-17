@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hexagonal.poc</groupId>
+    <artifactId>url-shortener</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>domain</module>
+        <module>application</module>
+    </modules>
+
+    <properties>
+
+        <java.version>21</java.version>
+        <jdk.version>${java.version}</jdk.version>
+        <release.version>${java.version}</release.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- tools -->
+        <log4j.version>2.22.1</log4j.version>
+        <lombok.version>1.18.30</lombok.version>
+
+        <!-- tests -->
+        <junit-jupiter.version>5.10.1</junit-jupiter.version>
+        <junit-platform-suit-api.version>1.10.1</junit-platform-suit-api.version>
+        <cucumber.version>7.15.0</cucumber.version>
+        <mockito-junit-jupiter.version>5.8.0</mockito-junit-jupiter.version>
+
+    </properties>
+
+    <dependencies>
+        <!-- tools -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>${junit-platform-suit-api.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito-junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <!-- framework options -->
+        <profile>
+            <id>fw-helidon</id>
+            <activation>
+                <property>
+                    <name>framework</name>
+                    <value>helidon</value>
+                </property>
+            </activation>
+
+            <modules>
+                <module>infrastructure/helidon-framework</module>
+            </modules>
+
+        </profile>
+
+        <profile>
+            <id>fw-micronaut</id>
+            <activation>
+                <property>
+                    <name>framework</name>
+                    <value>micronaut</value>
+                </property>
+            </activation>
+
+            <modules>
+                <module>infrastructure/micronaut-framework</module>
+            </modules>
+
+        </profile>
+
+        <profile>
+            <id>fw-quarkus</id>
+            <activation>
+                <property>
+                    <name>framework</name>
+                    <value>quarkus</value>
+                </property>
+            </activation>
+
+            <modules>
+                <module>infrastructure/quarkus-framework</module>
+            </modules>
+
+        </profile>
+
+        <profile>
+            <id>fw-spring</id>
+            <activation>
+                <property>
+                    <name>framework</name>
+                    <value>spring</value>
+                </property>
+            </activation>
+
+            <modules>
+                <module>infrastructure/spring-framework</module>
+            </modules>
+
+        </profile>
+    </profiles>
+
+</project>
